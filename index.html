@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paishaan— Student Expense Tracker</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <a class="brand" href="#">
+    <b class="brand-icon">P</b>
+    <span class="brand-text">
+        <span class="brand-name">Paishaan<span class="brand-dot">.</span></span>
+        <span class="tagline">Money Follows My Brother.</span>
+    </span>
+</a>
+    <small>WORKSPACE</small>
+
+    <a class="nav active" href="#overview">▦ &nbsp; Overview</a>
+    <a class="nav" href="#history">↗ &nbsp; Transactions</a>
+    <a class="nav" href="#analytics">◒ &nbsp; Analytics</a>
+
+    <div class="tip">
+        <i>✦</i>
+        <h3>Small steps.<br>Big savings.</h3>
+        <p>Track your spending and make your money work smarter.</p>
+    </div>
+
+    <div class="profile">
+        <b>ST</b>
+        <div>Student<small>Personal account</small></div>
+    </div>
+</aside>
+
+<main>
+    <header>
+        <div>
+            <label>YOUR MONEY, IN FOCUS</label>
+            <h1>Overview <span>✦</span></h1>
+            <p>Here’s what’s happening with your money.</p>
+        </div>
+        <button id="jump">＋ Add expense</button>
+    </header>
+
+    <section class="stats" id="overview">
+        <article class="stat featured">
+            <div>Total spent <em>↗</em></div>
+            <h2 id="total">₹0.00</h2>
+            <small id="month">This month</small>
+        </article>
+
+        <article class="stat">
+            <div>Transactions <em>⇄</em></div>
+            <h2 id="count">0</h2>
+            <small>Expenses recorded</small>
+        </article>
+
+        <article class="stat">
+            <div>Daily average <em>⌁</em></div>
+            <h2 id="average">₹0.00</h2>
+            <small>Based on this month</small>
+        </article>
+
+        <article class="stat">
+            <div>Monthly budget <em>◎</em></div>
+            <div class="budget">
+                ₹ <input id="budget" type="number" min="1" value="5000">
+                <button id="saveBudget">✓</button>
+            </div>
+            <div class="track"><i id="progress"></i></div>
+            <small id="budgetNote">₹5,000 left</small>
+        </article>
+    </section>
+
+    <section class="columns">
+        <article class="panel" id="analytics">
+            <div class="heading">
+                <div>
+                    <h3>Spending analytics</h3>
+                    <p>Understand where your money goes.</p>
+                </div>
+                <small>BY CATEGORY</small>
+            </div>
+
+            <div class="chart">
+                <canvas id="chart"></canvas>
+                <div id="chartEmpty">
+                    Add your first expense<br>to see your breakdown.
+                </div>
+            </div>
+
+            <div id="legend" class="legend"></div>
+        </article>
+
+        <article class="panel" id="add">
+            <div class="heading">
+                <div>
+                    <h3>Add an expense</h3>
+                    <p>Every rupee has a story.</p>
+                </div>
+                <strong class="plus">＋</strong>
+            </div>
+
+            <form id="form">
+                <label>Expense name</label>
+                <input id="title" placeholder="e.g. Lunch with friends" maxlength="60" required>
+
+                <div class="row">
+                    <div>
+                        <label>Amount (₹)</label>
+                        <input id="amount" type="number" min=".01" step=".01" placeholder="250" required>
+                    </div>
+
+                    <div>
+                        <label>Category</label>
+                        <select id="category">
+                            <option>Food</option>
+                            <option>Travel</option>
+                            <option>Study</option>
+                            <option>Shopping</option>
+                            <option>Bills</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label>Date</label>
+                <input id="date" type="date" required>
+
+                <button class="submit">Add transaction ↗</button>
+                <p class="privacy">🔒 Your entries stay in this browser.</p>
+            </form>
+        </article>
+    </section>
+
+    <section class="panel history" id="history">
+        <div class="heading historyhead">
+            <div>
+                <h3>Recent transactions</h3>
+                <p>Your latest spending activity.</p>
+            </div>
+
+            <div class="filters">
+                <input id="search" type="search" placeholder="Search expenses…">
+                <select id="filter">
+                    <option>All</option>
+                    <option>Food</option>
+                    <option>Travel</option>
+                    <option>Study</option>
+                    <option>Shopping</option>
+                    <option>Bills</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tablewrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TRANSACTION</th>
+                        <th>CATEGORY</th>
+                        <th>DATE</th>
+                        <th>AMOUNT</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="list"></tbody>
+            </table>
+        </div>
+
+        <div id="empty" class="empty">
+            <b>No expenses yet</b>
+            <p>Add an expense to start building your money overview.</p>
+        </div>
+
+        <div class="foot">
+            <span id="records">0 records</span>
+            <button id="clear">Clear all</button>
+        </div>
+    </section>
+
+    <footer>
+        Made for smarter student spending ✦
+        <span>PAISHAAN© <b id="year"></b></span>
+    </footer>
+</main>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
